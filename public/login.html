@@ -1,39 +1,684 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="color-scheme" content="light"><meta name="description" content="ورود امن به حساب کاربری">
-<title>ورود به حساب کاربری</title>
-<style>
-:root{--p:#6246e9;--p2:#8a63ff;--ink:#20213a;--muted:#8589a7;--line:#e7e8f1;--danger:#c83b55;--ok:#16855b}*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Tahoma,"Segoe UI",sans-serif;background:#10143c;color:var(--ink)}body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;overflow-x:hidden}.scene{position:fixed;inset:0;background:radial-gradient(circle at 78% 38%,#ffb4d0 0,#8c5ad7 24%,#27337e 57%,#0d1235 100%);z-index:-2}.scene:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,13,50,.05),rgba(8,12,43,.65))}.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:83px 83px;opacity:.38}.shell{width:min(1180px,100%);min-height:690px;border:1px solid rgba(255,255,255,.22);border-radius:34px;overflow:hidden;display:grid;grid-template-columns:1fr 1.08fr;box-shadow:0 35px 100px rgba(0,0,0,.35);background:#fff}.visual{position:relative;overflow:hidden;padding:62px 58px;color:#fff;display:flex;flex-direction:column;justify-content:flex-start;background:linear-gradient(180deg,rgba(28,31,86,.05),rgba(13,18,54,.5)),radial-gradient(circle at 72% 55%,#ffd6d4 0,#bd73c5 23%,#36428c 56%,#111841 100%)}.visual:before{content:"";position:absolute;width:150%;height:55%;bottom:-18%;left:-22%;background:linear-gradient(160deg,#202957 20%,#141a43 60%,#0c1230);clip-path:polygon(0 35%,18% 16%,32% 30%,46% 12%,62% 30%,79% 10%,100% 32%,100% 100%,0 100%);opacity:.92}.moon{position:absolute;top:70px;right:64px;width:48px;height:48px;border-radius:50%;background:#ffe1bd;box-shadow:0 0 35px rgba(255,225,189,.55)}.moon:after{content:"";position:absolute;right:-10px;top:-5px;width:48px;height:48px;border-radius:50%;background:#29337d}.brand{position:relative;z-index:1;text-align:center}.logo{width:82px;height:82px;border-radius:28px;margin:auto auto 22px;display:grid;place-items:center;font-size:46px;background:rgba(116,92,255,.26);border:1px solid rgba(255,255,255,.25);box-shadow:0 15px 40px rgba(0,0,0,.18)}h1{font-size:42px;margin:0 0 14px}.brand p{margin:0 auto;line-height:2;font-size:17px;max-width:380px;color:#f5efff}.features{position:absolute;z-index:2;bottom:42px;right:52px;left:52px;display:grid;gap:15px}.feature{display:flex;gap:14px;align-items:center}.feature i{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(108,83,239,.42);border:1px solid rgba(255,255,255,.25);font-style:normal}.feature strong{display:block;font-size:14px}.feature span{display:block;font-size:11px;color:#ddd9f2;margin-top:3px}.panel{background:rgba(255,255,255,.98);padding:52px 72px;display:flex;flex-direction:column;justify-content:center}.panel h2{text-align:center;margin:0;font-size:30px}.sub{text-align:center;color:var(--muted);margin:9px 0 30px;font-size:13px}.tabs{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--line);border-radius:14px;background:#fafaff;margin-bottom:28px;overflow:hidden}.tab{border:0;background:transparent;padding:15px 8px;color:#4c4e66;font:inherit;cursor:pointer}.tab.active{color:var(--p);background:#fff;box-shadow:0 5px 18px rgba(81,66,190,.12);font-weight:700}.method{display:none}.method.active{display:block}.field{margin-bottom:18px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}.input{width:100%;height:54px;border:1px solid var(--line);border-radius:12px;padding:0 16px;font:inherit;outline:none;transition:.2s;background:#fff}.input:focus{border-color:var(--p);box-shadow:0 0 0 4px rgba(98,70,233,.1)}.hint{text-align:left;margin:-7px 0 18px}.hint a,.signup a{color:var(--p);text-decoration:none}.primary{width:100%;height:55px;border:0;border-radius:12px;color:#fff;background:linear-gradient(90deg,var(--p),var(--p2));font:700 15px Tahoma;cursor:pointer;box-shadow:0 12px 25px rgba(98,70,233,.25)}.primary:disabled{opacity:.65;cursor:wait}.divider{display:flex;align-items:center;gap:12px;color:#9a9db5;font-size:12px;margin:25px 0 15px}.divider:before,.divider:after{content:"";height:1px;background:var(--line);flex:1}.socials{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.social{height:48px;border:1px solid var(--line);border-radius:11px;background:#fff;font-size:19px;cursor:pointer}.social[disabled]{opacity:.45;cursor:not-allowed}.signup{text-align:center;color:#9a9db5;font-size:13px;margin:25px 0 0}.notice{display:none;border-radius:10px;padding:11px 13px;font-size:12px;margin-bottom:15px}.notice.show{display:block}.notice.error{background:#fff0f3;color:var(--danger)}.notice.ok{background:#effbf5;color:var(--ok)}.otp-row{display:grid;grid-template-columns:1fr 130px;gap:10px}.secondary{height:54px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--p);font:700 13px Tahoma;cursor:pointer}.small{font-size:11px;color:var(--muted);line-height:1.8;margin-top:7px}.footer{text-align:center;color:#b1b3c5;font-size:10px;margin-top:18px}@media(max-width:900px){body{padding:0;align-items:flex-start}.shell{width:100%;min-height:100vh;border-radius:0;border:0;display:block;background:transparent}.visual{min-height:360px;padding:38px 24px}.visual:before{bottom:-30%}.moon{top:35px;right:28px}.brand h1{font-size:34px}.features{display:none}.panel{border-radius:30px 30px 0 0;margin-top:-24px;position:relative;padding:35px 22px 42px;min-height:620px}.panel h2{font-size:25px}.tabs{margin-bottom:22px}.tab{font-size:12px}.socials{grid-template-columns:repeat(4,1fr)}}@media(max-width:430px){.visual{min-height:320px}.logo{width:68px;height:68px;font-size:38px}.brand h1{font-size:31px}.brand p{font-size:14px}.panel{padding-left:16px;padding-right:16px}.socials{gap:7px}.social{font-size:17px}}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ورود | NightCast</title>
+
+    <meta name="theme-color" content="#0b1020">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100%;
+            font-family: Tahoma, Arial, sans-serif;
+            background:
+                radial-gradient(circle at top right, #202b55 0%, transparent 35%),
+                radial-gradient(circle at bottom left, #321d4d 0%, transparent 35%),
+                #080b16;
+            color: #fff;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .card {
+            background: rgba(15, 20, 38, 0.94);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 32px 26px;
+            box-shadow:
+                0 25px 70px rgba(0,0,0,0.45),
+                inset 0 1px 0 rgba(255,255,255,0.04);
+            backdrop-filter: blur(16px);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            background: linear-gradient(135deg, #7c5cff, #4b8cff);
+            box-shadow: 0 12px 35px rgba(91, 93, 255, 0.3);
+        }
+
+        h1 {
+            margin: 0;
+            text-align: center;
+            font-size: 26px;
+        }
+
+        .subtitle {
+            margin: 10px 0 28px;
+            text-align: center;
+            color: #aeb6ce;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+
+        .field {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #dce2f5;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            height: 50px;
+            border: 1px solid #303952;
+            border-radius: 12px;
+            outline: none;
+            padding: 0 15px;
+            background: #0c1122;
+            color: white;
+            font-size: 15px;
+            direction: ltr;
+            text-align: left;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #6c63ff;
+            box-shadow: 0 0 0 3px rgba(108,99,255,0.12);
+        }
+
+        button {
+            width: 100%;
+            height: 50px;
+            border: 0;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #6c63ff, #4b8cff);
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.08);
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .message {
+            display: none;
+            margin-bottom: 18px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .message.error {
+            display: block;
+            background: rgba(220, 60, 80, 0.12);
+            border: 1px solid rgba(220, 60, 80, 0.3);
+            color: #ff9da9;
+        }
+
+        .message.success {
+            display: block;
+            background: rgba(60, 200, 130, 0.12);
+            border: 1px solid rgba(60, 200, 130, 0.3);
+            color: #8ef0bd;
+        }
+
+        .status {
+            margin-top: 18px;
+            text-align: center;
+            color: #7f89a6;
+            font-size: 11px;
+            direction: ltr;
+            word-break: break-all;
+        }
+
+        .secure {
+            margin-top: 22px;
+            text-align: center;
+            color: #69738e;
+            font-size: 11px;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            color: #aeb6ce;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 28px 20px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div class="scene"><div class="stars"></div></div>
-<main class="shell">
-<section class="visual" aria-label="خوش آمدید"><div class="moon" aria-hidden="true"></div><div class="brand"><div class="logo" aria-hidden="true">✦</div><h1>خوش آمدید</h1><p>به حساب کاربری خود وارد شوید<br>تجربه‌ای ساده، سریع و امن در انتظار شماست ✨</p></div><div class="features"><div class="feature"><i>✓</i><div><strong>امن و مطمئن</strong><span>حفاظت از اطلاعات شما در بالاترین سطح</span></div></div><div class="feature"><i>⚡</i><div><strong>سریع و آسان</strong><span>ورود سریع و بدون دردسر</span></div></div><div class="feature"><i>⌁</i><div><strong>دسترسی همه‌جا</strong><span>از هر دستگاه و هر مکانی</span></div></div></div></section>
-<section class="panel" aria-labelledby="title"><h2 id="title">ورود به حساب کاربری</h2><p class="sub">یکی از روش‌های زیر را انتخاب کنید</p><div id="notice" class="notice" role="alert" aria-live="polite"></div>
-<nav class="tabs" aria-label="روش ورود"><button class="tab active" data-method="password">ورود دستی</button><button class="tab" data-method="sms">ورود با (SMS)</button><button class="tab" data-method="oidc">ورود با OpenID</button></nav>
-<div id="password" class="method active"><form id="passwordForm"><div class="field"><label for="identifier">ایمیل یا نام کاربری</label><input id="identifier" class="input" autocomplete="username" required maxlength="254" placeholder="example@email.com"></div><div class="field"><label for="password">رمز عبور</label><input id="password" class="input" type="password" autocomplete="current-password" required maxlength="256" placeholder="رمز عبور خود را وارد کنید"></div><div class="hint"><a href="/forgot-password.html">رمز عبور خود را فراموش کرده‌اید؟</a></div><button class="primary" type="submit">ورود به حساب کاربری ←</button></form></div>
-<div id="sms" class="method"><form id="smsForm"><div class="field"><label for="phone">شماره موبایل</label><input id="phone" class="input" inputmode="tel" autocomplete="tel" required maxlength="32" placeholder="+989121234567"></div><div id="otpBox" class="field" hidden><label for="otp">کد تأیید</label><input id="otp" class="input" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="کد ۶ رقمی"></div><div class="otp-row"><button id="smsAction" class="primary" type="submit">دریافت کد</button><button id="resend" class="secondary" type="button" hidden>ارسال مجدد</button></div><p class="small">کد تأیید مدت کوتاهی معتبر است و پس از استفاده قابل استفاده مجدد نیست.</p></form></div>
-<div id="oidc" class="method"><button id="oidcBtn" class="primary" type="button">ادامه با OpenID Connect</button><p class="small">با انتخاب این گزینه به ارائه‌دهنده هویت امن پروژه هدایت می‌شوید. Secretها هرگز در مرورگر قرار نمی‌گیرند.</p></div>
-<div class="divider">یا با حساب‌های دیگر وارد شوید</div><div class="socials"><button class="social" disabled aria-label="Google">G</button><button class="social" disabled aria-label="Apple">●</button><button class="social" disabled aria-label="Telegram">➤</button><button class="social" disabled aria-label="Provider">ID</button></div><p class="signup">حساب کاربری ندارید؟ <a href="/register.html">ثبت‌نام کنید</a></p><div class="footer">Secure Authentication Core</div>
-</section></main>
+
+<div class="container">
+
+    <div class="card">
+
+        <div class="logo">✦</div>
+
+        <h1>خوش آمدید</h1>
+
+        <div class="subtitle">
+            به حساب کاربری خود وارد شوید<br>
+            تجربه‌ای ساده، سریع و امن در انتظار شماست ✨
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <div id="loading" class="loading">
+            در حال برقراری ارتباط با سرویس احراز هویت...
+        </div>
+
+        <form id="loginForm">
+
+            <div class="field">
+                <label for="identifier">
+                    ایمیل یا نام کاربری
+                </label>
+
+                <input
+                    id="identifier"
+                    name="identifier"
+                    type="text"
+                    autocomplete="username"
+                    placeholder="نام کاربری یا ایمیل"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="password">
+                    رمز عبور
+                </label>
+
+                <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autocomplete="current-password"
+                    placeholder="رمز عبور"
+                    required
+                >
+            </div>
+
+            <button id="loginButton" type="submit">
+                ورود به حساب کاربری
+            </button>
+
+        </form>
+
+        <div class="secure">
+            Secure Authentication Core
+        </div>
+
+        <div class="status">
+            Worker: nightcastworks.tomasgermany2580.workers.dev
+        </div>
+
+    </div>
+
+</div>
+
 <script>
-(() => {
-  'use strict';
-  let csrf=''; let smsSent=false;
-  const $=s=>document.querySelector(s); const notice=$('#notice');
-  function show(message,type='error'){notice.textContent=message;notice.className='notice show '+type}
-  function busy(btn,on,text){btn.disabled=on;if(text)btn.textContent=text}
-  async function api(path,options={}){const r=await fetch(path,{credentials:'same-origin',headers:{'Content-Type':'application/json',...(csrf?{'X-CSRF-Token':csrf}:{})},...options});let j=null;try{j=await r.json()}catch{}if(!r.ok||!j?.success)throw Object.assign(new Error(j?.error?.message||'خطایی رخ داد.'),{status:r.status,body:j});return j}
-  async function init(){try{const j=await api('/api/auth/v1/csrf',{method:'GET',headers:{}});csrf=j.data.csrfToken}catch(e){show('اتصال امن به سرویس ورود برقرار نشد.')} }
-  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.method').forEach(x=>x.classList.remove('active'));t.classList.add('active');$('#'+t.dataset.method).classList.add('active');notice.className='notice'}));
-  $('#passwordForm').addEventListener('submit',async e=>{e.preventDefault();const b=e.submitter||e.target.querySelector('.primary');busy(b,true,'در حال ورود...');try{const j=await api('/api/auth/v1/login/password',{method:'POST',body:JSON.stringify({identifier:$('#identifier').value,password:$('#password').value})});show('ورود موفق بود؛ در حال انتقال...','ok');location.assign(j.data.redirect)}catch(x){show(x.message)}finally{busy(b,false,'ورود به حساب کاربری ←')}});
-  $('#smsForm').addEventListener('submit',async e=>{e.preventDefault();const b=$('#smsAction');if(!smsSent){busy(b,true,'در حال ارسال...');try{await api('/api/auth/v1/login/sms/request',{method:'POST',body:JSON.stringify({phone:$('#phone').value})});smsSent=true;$('#otpBox').hidden=false;$('#resend').hidden=false;b.textContent='تأیید کد';show('اگر شماره قابل استفاده باشد، کد ارسال خواهد شد.','ok')}catch(x){show(x.message)}finally{b.disabled=false}}else{busy(b,true,'در حال بررسی...');try{const j=await api('/api/auth/v1/login/sms/verify',{method:'POST',body:JSON.stringify({phone:$('#phone').value,otp:$('#otp').value})});show('ورود موفق بود؛ در حال انتقال...','ok');location.assign(j.data.redirect)}catch(x){show(x.message)}finally{b.disabled=false;b.textContent='تأیید کد'}}});
-  $('#resend').addEventListener('click',async()=>{$('#smsForm').requestSubmit()});
-  $('#oidcBtn').addEventListener('click',()=>{location.assign('/api/auth/v1/oidc/start')});
-  init();
+"use strict";
+
+/*
+|--------------------------------------------------------------------------
+| NightCast Authentication
+|--------------------------------------------------------------------------
+*/
+
+const WORKER_URL =
+    "https://nightcastworks.tomasgermany2580.workers.dev";
+
+const API_BASE =
+    WORKER_URL + "/api/auth/v1";
+
+let csrfToken = null;
+
+
+/*
+|--------------------------------------------------------------------------
+| DOM
+|--------------------------------------------------------------------------
+*/
+
+const form = document.getElementById("loginForm");
+const identifierInput = document.getElementById("identifier");
+const passwordInput = document.getElementById("password");
+const loginButton = document.getElementById("loginButton");
+const messageBox = document.getElementById("message");
+const loadingBox = document.getElementById("loading");
+
+
+/*
+|--------------------------------------------------------------------------
+| UI
+|--------------------------------------------------------------------------
+*/
+
+function showMessage(message, type = "error") {
+
+    messageBox.textContent = message;
+
+    messageBox.className =
+        "message " + type;
+}
+
+
+function clearMessage() {
+
+    messageBox.textContent = "";
+
+    messageBox.className =
+        "message";
+}
+
+
+function setLoading(state) {
+
+    loginButton.disabled = state;
+
+    loadingBox.style.display =
+        state ? "block" : "none";
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| API helper
+|--------------------------------------------------------------------------
+*/
+
+async function apiFetch(path, options = {}) {
+
+    const config = {
+
+        credentials: "include",
+
+        ...options,
+
+        headers: {
+
+            "Accept": "application/json",
+
+            ...(options.body
+                ? { "Content-Type": "application/json" }
+                : {}),
+
+            ...(options.headers || {})
+        }
+    };
+
+    const response =
+        await fetch(API_BASE + path, config);
+
+    const text =
+        await response.text();
+
+    let data;
+
+    try {
+
+        data = JSON.parse(text);
+
+    } catch (e) {
+
+        throw new Error(
+            "پاسخ Worker معتبر نیست. HTTP " +
+            response.status +
+            " — " +
+            text.substring(0, 150)
+        );
+    }
+
+    return {
+        response,
+        data
+    };
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| CSRF
+|--------------------------------------------------------------------------
+*/
+
+async function getCsrfToken() {
+
+    const result =
+        await apiFetch("/csrf", {
+            method: "GET"
+        });
+
+    if (!result.response.ok) {
+
+        throw new Error(
+            result.data?.error?.message ||
+            "دریافت CSRF Token ناموفق بود."
+        );
+    }
+
+    if (
+        !result.data.success ||
+        !result.data.data?.csrfToken
+    ) {
+
+        throw new Error(
+            "Worker توکن CSRF ارسال نکرد."
+        );
+    }
+
+    csrfToken =
+        result.data.data.csrfToken;
+
+    return csrfToken;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Current Session
+|--------------------------------------------------------------------------
+*/
+
+async function checkSession() {
+
+    try {
+
+        const result =
+            await apiFetch("/session", {
+                method: "GET"
+            });
+
+        if (
+            result.data?.success &&
+            result.data?.data?.authenticated
+        ) {
+
+            const redirect =
+                result.data.data.expiresAt
+                    ? "/dashboard.html"
+                    : "/dashboard.html";
+
+            window.location.href =
+                redirect;
+        }
+
+    } catch (e) {
+
+        console.warn(
+            "Session check failed:",
+            e
+        );
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Login
+|--------------------------------------------------------------------------
+*/
+
+async function login() {
+
+    clearMessage();
+
+    const identifier =
+        identifierInput.value.trim();
+
+    const password =
+        passwordInput.value;
+
+    if (!identifier) {
+
+        showMessage(
+            "نام کاربری یا ایمیل را وارد کنید."
+        );
+
+        return;
+    }
+
+    if (!password) {
+
+        showMessage(
+            "رمز عبور را وارد کنید."
+        );
+
+        return;
+    }
+
+    setLoading(true);
+
+    try {
+
+        /*
+         * همیشه قبل از POST توکن CSRF
+         * را دریافت می‌کنیم.
+         */
+
+        if (!csrfToken) {
+
+            await getCsrfToken();
+        }
+
+
+        const result =
+            await apiFetch(
+                "/login/password",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "X-CSRF-Token":
+                            csrfToken
+                    },
+
+                    body: JSON.stringify({
+                        identifier,
+                        password
+                    })
+                }
+            );
+
+
+        /*
+         * اگر CSRF منقضی یا نامعتبر شده
+         * یک بار دوباره دریافت می‌کنیم.
+         */
+
+        if (
+            result.data?.error?.code ===
+            "CSRF_FAILED"
+        ) {
+
+            csrfToken = null;
+
+            await getCsrfToken();
+
+            const retry =
+                await apiFetch(
+                    "/login/password",
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "X-CSRF-Token":
+                                csrfToken
+                        },
+
+                        body: JSON.stringify({
+                            identifier,
+                            password
+                        })
+                    }
+                );
+
+            if (!retry.data.success) {
+
+                throw new Error(
+                    retry.data?.error?.message ||
+                    "ورود ناموفق بود."
+                );
+            }
+
+            showMessage(
+                "ورود موفق بود. در حال انتقال...",
+                "success"
+            );
+
+            setTimeout(() => {
+
+                window.location.href =
+                    retry.data.data.redirect ||
+                    "/dashboard.html";
+
+            }, 400);
+
+            return;
+        }
+
+
+        if (!result.data.success) {
+
+            throw new Error(
+                result.data?.error?.message ||
+                "نام کاربری یا رمز عبور صحیح نیست."
+            );
+        }
+
+
+        showMessage(
+            "ورود موفق بود. در حال انتقال...",
+            "success"
+        );
+
+
+        const redirect =
+            result.data.data?.redirect ||
+            "/dashboard.html";
+
+        setTimeout(() => {
+
+            window.location.href =
+                redirect;
+
+        }, 400);
+
+    } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            error.message ||
+            "خطایی در اتصال به سرویس احراز هویت رخ داد."
+        );
+
+    } finally {
+
+        setLoading(false);
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Form
+|--------------------------------------------------------------------------
+*/
+
+form.addEventListener(
+    "submit",
+    function(event) {
+
+        event.preventDefault();
+
+        login();
+    }
+);
+
+
+/*
+|--------------------------------------------------------------------------
+| Initialisation
+|--------------------------------------------------------------------------
+*/
+
+(async function init() {
+
+    try {
+
+        /*
+         * اول Session فعلی را بررسی می‌کنیم.
+         */
+
+        await checkSession();
+
+        /*
+         * سپس CSRF را آماده می‌کنیم.
+         */
+
+        await getCsrfToken();
+
+        console.log(
+            "NightCast Authentication initialized."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Authentication initialization failed:",
+            error
+        );
+
+        showMessage(
+            "اتصال به سرویس احراز هویت برقرار نشد. Worker و ALLOWED_ORIGINS را بررسی کنید."
+        );
+    }
+
 })();
 </script>
-</body></html>
+
+</body>
+  </html>
