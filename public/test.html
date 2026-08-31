@@ -1,402 +1,496 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Authentication Core Test</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <meta name="robots" content="noindex,nofollow,noarchive">
+    <title>
+        Authentication Core — Test Panel
+    </title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
+
             margin: 0;
-            min-height: 100vh;
-            font-family: Tahoma, Arial, sans-serif;
-            background:
-                radial-gradient(circle at top, #172554 0, #0f172a 42%, #020617 100%);
-            color: #e5e7eb;
             padding: 20px;
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            background:
+                #080b16;
+
+            color: #fff;
+
+            direction: rtl;
         }
 
         .container {
-            width: min(900px, 100%);
-            margin: 0 auto;
-        }
 
-        .header {
-            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+
+            margin:
+                0 auto;
         }
 
         h1 {
-            margin: 0 0 8px;
-            font-size: 25px;
-        }
 
-        .subtitle {
-            color: #94a3b8;
-            font-size: 14px;
-        }
-
-        .card {
-            background: rgba(15, 23, 42, 0.88);
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            border-radius: 18px;
-            padding: 20px;
-            margin-bottom: 16px;
-            box-shadow: 0 15px 45px rgba(0,0,0,.25);
-        }
-
-        .status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 15px;
-        }
-
-        .dot {
-            width: 11px;
-            height: 11px;
-            border-radius: 50%;
-            background: #64748b;
-        }
-
-        .dot.ok {
-            background: #22c55e;
-            box-shadow: 0 0 12px rgba(34,197,94,.7);
-        }
-
-        .dot.error {
-            background: #ef4444;
-            box-shadow: 0 0 12px rgba(239,68,68,.7);
-        }
-
-        .test {
-            border-top: 1px solid rgba(148,163,184,.12);
-            padding: 16px 0;
-        }
-
-        .test:first-child {
-            border-top: 0;
-            padding-top: 0;
-        }
-
-        .test-title {
-            font-weight: bold;
             margin-bottom: 8px;
         }
 
-        .result {
-            white-space: pre-wrap;
-            word-break: break-word;
-            background: #020617;
-            border-radius: 10px;
-            padding: 12px;
-            font-family: monospace;
-            font-size: 12px;
-            color: #cbd5e1;
-            overflow-x: auto;
-            min-height: 45px;
+        .subtitle {
+
+            color: #9da7c0;
+            margin-bottom: 25px;
+        }
+
+        .card {
+
+            background: #11172a;
+
+            border:
+                1px solid #252e49;
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+            margin-bottom: 18px;
+        }
+
+        .card h2 {
+
+            margin-top: 0;
+
+            font-size: 18px;
         }
 
         button {
+
             border: 0;
+
             border-radius: 10px;
-            padding: 11px 17px;
-            background: #2563eb;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #6c63ff,
+                    #4b8cff
+                );
+
             color: white;
+
+            padding:
+                12px 18px;
+
             cursor: pointer;
+
             font-size: 14px;
-            margin-left: 6px;
-            margin-bottom: 6px;
-        }
-
-        button:hover {
-            background: #1d4ed8;
-        }
-
-        button.secondary {
-            background: #334155;
-        }
-
-        button.danger {
-            background: #991b1b;
         }
 
         button:disabled {
+
             opacity: .5;
+
             cursor: not-allowed;
         }
 
         input {
+
             width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #334155;
-            background: #020617;
+
+            height: 45px;
+
+            margin-bottom: 12px;
+
+            border:
+                1px solid #303952;
+
+            border-radius: 9px;
+
+            background: #090e1e;
+
             color: white;
-            margin-bottom: 10px;
+
+            padding:
+                0 12px;
+
+            direction: ltr;
+
+            text-align: left;
+
             outline: none;
         }
 
         input:focus {
-            border-color: #3b82f6;
+
+            border-color:
+                #6c63ff;
+        }
+
+        pre {
+
+            background:
+                #070a13;
+
+            border:
+                1px solid #20283e;
+
+            border-radius: 10px;
+
+            padding: 14px;
+
+            overflow-x: auto;
+
+            white-space: pre-wrap;
+
+            word-break: break-word;
+
+            direction: ltr;
+
+            text-align: left;
+
+            color: #d8def0;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+        .ok {
+
+            color:
+                #7ee2ae;
+        }
+
+        .error {
+
+            color:
+                #ff8f9d;
         }
 
         .warning {
-            background: rgba(245,158,11,.1);
-            border: 1px solid rgba(245,158,11,.25);
-            color: #fbbf24;
-            border-radius: 12px;
-            padding: 13px;
-            font-size: 13px;
-            line-height: 1.8;
+
+            color:
+                #ffd479;
         }
 
-        .success {
-            color: #4ade80;
+        .status {
+
+            padding:
+                10px 12px;
+
+            border-radius:
+                9px;
+
+            background:
+                #0b1020;
+
+            margin-top:
+                12px;
+
+            color:
+                #aeb7ce;
+
+            font-size:
+                13px;
         }
 
-        .error-text {
-            color: #f87171;
+        .row {
+
+            display:
+                grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap:
+                12px;
         }
 
-        .small {
-            font-size: 12px;
-            color: #94a3b8;
-            line-height: 1.8;
+        @media(max-width:600px) {
+
+            .row {
+
+                grid-template-columns:
+                    1fr;
+            }
         }
+
     </style>
+
 </head>
 
 <body>
 
 <div class="container">
 
-    <div class="header">
-        <h1>Authentication Core — Test Panel</h1>
-        <div class="subtitle">
-            پنل موقت تست Authentication Worker
-        </div>
-    </div>
+    <h1>
+        Authentication Core — Test Panel
+    </h1>
 
-    <div class="card">
-
-        <div class="warning">
-            ⚠️ این فایل فقط برای تست است.
-            بعد از پایان تست‌های Authentication آن را حذف کنید.
-            هیچ Secret، Password یا Token دائمی نباید داخل این فایل قرار گیرد.
-        </div>
-
+    <div class="subtitle">
+        پنل موقت تست Authentication Worker
     </div>
 
 
-    <!-- CONFIG TEST -->
+    <!-- =====================================================
+         CONFIG
+    ====================================================== -->
 
     <div class="card">
 
-        <div class="test">
+        <h2>
+            1. Worker Configuration
+        </h2>
 
-            <div class="test-title">
-                1. Worker Configuration
-            </div>
+        <button
+            id="configButton"
+            onclick="getConfig()"
+        >
+            دریافت Configuration
+        </button>
 
-            <button onclick="testConfig()">
-                اجرای تست
-            </button>
-
-            <div id="configResult" class="result">
-                هنوز تست نشده است.
-            </div>
-
-        </div>
-
-
-        <!-- CSRF TEST -->
-
-        <div class="test">
-
-            <div class="test-title">
-                2. CSRF Token
-            </div>
-
-            <button onclick="testCsrf()">
-                دریافت CSRF Token
-            </button>
-
-            <div id="csrfResult" class="result">
-                هنوز تست نشده است.
-            </div>
-
-        </div>
-
-
-        <!-- SESSION TEST -->
-
-        <div class="test">
-
-            <div class="test-title">
-                3. Current Session
-            </div>
-
-            <button onclick="testSession()">
-                بررسی Session
-            </button>
-
-            <div id="sessionResult" class="result">
-                هنوز تست نشده است.
-            </div>
-
-        </div>
-
-
-        <!-- LOGOUT TEST -->
-
-        <div class="test">
-
-            <div class="test-title">
-                4. Logout
-            </div>
-
-            <button class="danger" onclick="testLogout()">
-                Logout
-            </button>
-
-            <div id="logoutResult" class="result">
-                هنوز تست نشده است.
-            </div>
-
-        </div>
+        <pre id="configResult">
+هنوز تست نشده است.
+        </pre>
 
     </div>
 
 
-    <!-- PASSWORD TEST -->
+    <!-- =====================================================
+         CSRF
+    ====================================================== -->
 
     <div class="card">
 
-        <div class="test">
+        <h2>
+            2. CSRF Token
+        </h2>
 
-            <div class="test-title">
-                5. Password Login
-            </div>
+        <button
+            id="csrfButton"
+            onclick="getCSRF()"
+        >
+            دریافت CSRF Token
+        </button>
 
-            <div class="small">
-                بعد از ایجاد User تست، اطلاعات آن را اینجا وارد می‌کنیم.
-                Password در این صفحه ذخیره نمی‌شود.
-            </div>
-
-            <br>
-
-            <label for="identifier">
-                نام کاربری یا ایمیل
-            </label>
-
-            <input
-                id="identifier"
-                type="text"
-                autocomplete="username"
-                placeholder="username یا email"
-            >
-
-            <label for="password">
-                رمز عبور
-            </label>
-
-            <input
-                id="password"
-                type="password"
-                autocomplete="current-password"
-                placeholder="رمز عبور"
-            >
-
-            <button onclick="testPasswordLogin()">
-                ورود
-            </button>
-
-            <div id="passwordResult" class="result">
-                هنوز تست نشده است.
-            </div>
-
-        </div>
+        <pre id="csrfResult">
+هنوز تست نشده است.
+        </pre>
 
     </div>
 
 
-    <!-- SMS TEST -->
+    <!-- =====================================================
+         SESSION
+    ====================================================== -->
 
     <div class="card">
 
-        <div class="test">
+        <h2>
+            3. Current Session
+        </h2>
 
-            <div class="test-title">
-                6. SMS / OTP
-            </div>
+        <button
+            onclick="getSession()"
+        >
+            بررسی Session
+        </button>
 
-            <div class="small">
-                این تست فقط زمانی فعال می‌شود که SMS_ENABLED در Worker
-                فعال شده و یک SMS Provider واقعی به Adapter متصل شده باشد.
-            </div>
-
-            <br>
-
-            <input
-                id="phone"
-                type="tel"
-                autocomplete="tel"
-                placeholder="+989xxxxxxxxx"
-            >
-
-            <button onclick="requestSms()">
-                درخواست OTP
-            </button>
-
-            <input
-                id="otp"
-                type="text"
-                inputmode="numeric"
-                autocomplete="one-time-code"
-                maxlength="6"
-                placeholder="کد ۶ رقمی"
-            >
-
-            <button onclick="verifySms()">
-                تأیید OTP
-            </button>
-
-            <div id="smsResult" class="result">
-                هنوز تست نشده است.
-            </div>
-
-        </div>
+        <pre id="sessionResult">
+هنوز تست نشده است.
+        </pre>
 
     </div>
 
 
-    <!-- GENERAL STATUS -->
+    <!-- =====================================================
+         LOGOUT
+    ====================================================== -->
 
     <div class="card">
+
+        <h2>
+            4. Logout
+        </h2>
+
+        <button
+            onclick="logout()"
+        >
+            Logout
+        </button>
+
+        <pre id="logoutResult">
+هنوز تست نشده است.
+        </pre>
+
+    </div>
+
+
+    <!-- =====================================================
+         LOGIN
+    ====================================================== -->
+
+    <div class="card">
+
+        <h2>
+            5. Password Login
+        </h2>
+
+        <p>
+            اطلاعات User تستی ساخته‌شده در D1 را وارد کنید.
+        </p>
+
+        <div class="row">
+
+            <div>
+
+                <label>
+                    نام کاربری یا ایمیل
+                </label>
+
+                <input
+                    id="loginIdentifier"
+                    type="text"
+                    placeholder="hamed"
+                    autocomplete="username"
+                >
+
+            </div>
+
+            <div>
+
+                <label>
+                    رمز عبور
+                </label>
+
+                <input
+                    id="loginPassword"
+                    type="password"
+                    placeholder="رمز عبور"
+                    autocomplete="current-password"
+                >
+
+            </div>
+
+        </div>
+
+        <button
+            onclick="passwordLogin()"
+        >
+            ورود
+        </button>
+
+        <pre id="loginResult">
+هنوز تست نشده است.
+        </pre>
+
+    </div>
+
+
+    <!-- =====================================================
+         SMS
+    ====================================================== -->
+
+    <div class="card">
+
+        <h2>
+            6. SMS / OTP
+        </h2>
+
+        <p>
+            این بخش در Worker فعلی غیرفعال است.
+        </p>
+
+        <input
+            id="phone"
+            type="text"
+            placeholder="+989xxxxxxxxx"
+        >
+
+        <button
+            onclick="requestSMS()"
+        >
+            درخواست OTP
+        </button>
+
+        <br>
+        <br>
+
+        <input
+            id="otp"
+            type="text"
+            maxlength="6"
+            placeholder="کد ۶ رقمی"
+        >
+
+        <button
+            onclick="verifySMS()"
+        >
+            تأیید OTP
+        </button>
+
+        <pre id="smsResult">
+هنوز تست نشده است.
+        </pre>
+
+    </div>
+
+
+    <!-- =====================================================
+         SYSTEM STATUS
+    ====================================================== -->
+
+    <div class="card">
+
+        <h2>
+            وضعیت سیستم
+        </h2>
 
         <div class="status">
-            <span id="statusDot" class="dot"></span>
-            <strong id="statusText">
-                وضعیت: آماده تست
-            </strong>
-        </div>
 
-        <div class="small">
             Worker:
-            nightcastworks.tomasgermany2580.workers.dev
-            <br>
-            Database Binding:
-            DB
-            <br>
+            <span dir="ltr">
+                nightcastworks.tomasgermany2580.workers.dev
+            </span>
+
+            <br><br>
+
+            Database:
+            <span dir="ltr">
+                nightcastdb
+            </span>
+
+            <br><br>
+
+            Binding:
+            <span dir="ltr">
+                DB
+            </span>
+
+            <br><br>
+
             Authentication API:
-            /api/auth/v1/
+            <span dir="ltr">
+                /api/auth/v1/
+            </span>
+
         </div>
 
     </div>
@@ -405,607 +499,738 @@
 
 
 <script>
+
 "use strict";
 
-/*
- * TEST CLIENT ONLY
- *
- * No secrets.
- * No database credentials.
- * No password hashing.
- * No session token storage.
- */
 
-const API_BASE = "/api/auth/v1";
+/*
+|--------------------------------------------------------------------------
+| Worker
+|--------------------------------------------------------------------------
+*/
+
+const WORKER_URL =
+    "https://nightcastworks.tomasgermany2580.workers.dev";
+
+const API_BASE =
+    WORKER_URL + "/api/auth/v1";
+
+
+/*
+|--------------------------------------------------------------------------
+| Global CSRF
+|--------------------------------------------------------------------------
+*/
 
 let csrfToken = null;
 
 
-function setResult(id, value, ok = null) {
+/*
+|--------------------------------------------------------------------------
+| Pretty JSON
+|--------------------------------------------------------------------------
+*/
 
-    const element = document.getElementById(id);
+function pretty(data) {
 
-    if (typeof value === "object") {
-        element.textContent = JSON.stringify(value, null, 2);
-    } else {
-        element.textContent = String(value);
-    }
-
-    if (ok === true) {
-        element.classList.add("success");
-        element.classList.remove("error-text");
-    }
-
-    if (ok === false) {
-        element.classList.add("error-text");
-        element.classList.remove("success");
-    }
+    return JSON.stringify(
+        data,
+        null,
+        2
+    );
 }
 
 
-function setStatus(text, ok) {
+/*
+|--------------------------------------------------------------------------
+| Output
+|--------------------------------------------------------------------------
+*/
 
-    const dot = document.getElementById("statusDot");
-    const status = document.getElementById("statusText");
+function output(
+    elementId,
+    data
+) {
 
-    status.textContent = "وضعیت: " + text;
-
-    dot.classList.remove("ok", "error");
-
-    if (ok === true) {
-        dot.classList.add("ok");
-    }
-
-    if (ok === false) {
-        dot.classList.add("error");
-    }
-}
-
-
-async function request(path, options = {}) {
-
-    const headers = new Headers(options.headers || {});
-
-    headers.set("Accept", "application/json");
-
-    if (options.body) {
-        headers.set("Content-Type", "application/json");
-    }
+    const element =
+        document.getElementById(elementId);
 
     if (
-        options.method &&
-        options.method.toUpperCase() !== "GET" &&
-        csrfToken
+        typeof data === "string"
     ) {
-        headers.set("X-CSRF-Token", csrfToken);
-    }
 
-    return fetch(API_BASE + path, {
-        ...options,
-        headers,
-        credentials: "include",
-        cache: "no-store"
-    });
-}
-
-
-/* --------------------------------------------------
-   CONFIG
--------------------------------------------------- */
-
-async function testConfig() {
-
-    setResult(
-        "configResult",
-        "در حال دریافت..."
-    );
-
-    try {
-
-        const response = await request("/config");
-
-        const data = await response.json();
-
-        setResult(
-            "configResult",
-            data,
-            data.success === true
-        );
-
-        setStatus(
-            data.success ? "Worker فعال است" : "خطا",
-            data.success
-        );
-
-    } catch (error) {
-
-        setResult(
-            "configResult",
-            error.message,
-            false
-        );
-
-        setStatus("خطا در اتصال به Worker", false);
-    }
-}
-
-
-/* --------------------------------------------------
-   CSRF
--------------------------------------------------- */
-
-async function testCsrf() {
-
-    setResult(
-        "csrfResult",
-        "در حال دریافت CSRF Token..."
-    );
-
-    try {
-
-        const response = await request("/csrf");
-
-        const data = await response.json();
-
-        if (
-            response.ok &&
-            data.success === true &&
-            data.data &&
-            data.data.csrfToken
-        ) {
-
-            csrfToken = data.data.csrfToken;
-
-            setResult(
-                "csrfResult",
-                {
-                    success: true,
-                    message: "CSRF Token دریافت شد.",
-                    tokenReceived: true
-                },
-                true
-            );
-
-            setStatus("CSRF آماده است", true);
-
-        } else {
-
-            setResult(
-                "csrfResult",
-                data,
-                false
-            );
-        }
-
-    } catch (error) {
-
-        setResult(
-            "csrfResult",
-            error.message,
-            false
-        );
-    }
-}
-
-
-/* --------------------------------------------------
-   SESSION
--------------------------------------------------- */
-
-async function testSession() {
-
-    setResult(
-        "sessionResult",
-        "در حال بررسی Session..."
-    );
-
-    try {
-
-        const response = await request("/session");
-
-        const data = await response.json();
-
-        setResult(
-            "sessionResult",
-            data,
-            response.ok && data.success === true
-        );
-
-        if (
-            data.success === true &&
-            data.data &&
-            data.data.authenticated === true
-        ) {
-
-            setStatus("کاربر وارد شده است", true);
-
-        } else {
-
-            setStatus("کاربر Login نشده است", true);
-        }
-
-    } catch (error) {
-
-        setResult(
-            "sessionResult",
-            error.message,
-            false
-        );
-    }
-}
-
-
-/* --------------------------------------------------
-   LOGOUT
--------------------------------------------------- */
-
-async function testLogout() {
-
-    if (!csrfToken) {
-
-        await testCsrf();
-
-        if (!csrfToken) {
-
-            setResult(
-                "logoutResult",
-                "ابتدا CSRF Token دریافت نشد.",
-                false
-            );
-
-            return;
-        }
-    }
-
-    setResult(
-        "logoutResult",
-        "در حال Logout..."
-    );
-
-    try {
-
-        const response = await request(
-            "/logout",
-            {
-                method: "POST",
-                body: JSON.stringify({})
-            }
-        );
-
-        const data = await response.json();
-
-        setResult(
-            "logoutResult",
-            data,
-            response.ok && data.success === true
-        );
-
-        if (data.success === true) {
-
-            setStatus("Logout موفق", true);
-
-            await testSession();
-        }
-
-    } catch (error) {
-
-        setResult(
-            "logoutResult",
-            error.message,
-            false
-        );
-    }
-}
-
-
-/* --------------------------------------------------
-   PASSWORD LOGIN
--------------------------------------------------- */
-
-async function testPasswordLogin() {
-
-    if (!csrfToken) {
-
-        await testCsrf();
-
-        if (!csrfToken) {
-
-            setResult(
-                "passwordResult",
-                "CSRF Token دریافت نشد.",
-                false
-            );
-
-            return;
-        }
-    }
-
-
-    const identifier =
-        document.getElementById("identifier").value.trim();
-
-    const password =
-        document.getElementById("password").value;
-
-
-    if (!identifier || !password) {
-
-        setResult(
-            "passwordResult",
-            "نام کاربری/ایمیل و رمز عبور را وارد کنید.",
-            false
-        );
+        element.textContent =
+            data;
 
         return;
     }
 
+    element.textContent =
+        pretty(data);
+}
 
-    setResult(
-        "passwordResult",
-        "در حال Login..."
-    );
+
+/*
+|--------------------------------------------------------------------------
+| API Request
+|--------------------------------------------------------------------------
+*/
+
+async function apiRequest(
+    path,
+    options = {}
+) {
+
+    const config = {
+
+        credentials:
+            "include",
+
+        ...options,
+
+        headers: {
+
+            "Accept":
+                "application/json",
+
+            ...(options.body
+                ? {
+                    "Content-Type":
+                        "application/json"
+                }
+                : {}),
+
+            ...(options.headers || {})
+        }
+
+    };
+
+
+    const response =
+        await fetch(
+            API_BASE + path,
+            config
+        );
+
+
+    const text =
+        await response.text();
+
+
+    let data;
 
 
     try {
 
-        const response = await request(
-            "/login/password",
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    identifier,
-                    password
-                })
+        data =
+            JSON.parse(text);
+
+    } catch (error) {
+
+        return {
+
+            response,
+
+            data: {
+
+                success: false,
+
+                error: {
+
+                    code:
+                        "INVALID_JSON_RESPONSE",
+
+                    message:
+                        "Worker پاسخ JSON معتبر نداد.",
+
+                    httpStatus:
+                        response.status,
+
+                    raw:
+                        text.substring(
+                            0,
+                            500
+                        )
+                }
+
             }
+
+        };
+    }
+
+
+    return {
+
+        response,
+
+        data
+    };
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| 1. CONFIG
+|--------------------------------------------------------------------------
+*/
+
+async function getConfig() {
+
+    try {
+
+        const result =
+            await apiRequest(
+                "/config",
+                {
+                    method:
+                        "GET"
+                }
+            );
+
+
+        output(
+            "configResult",
+            result.data
         );
 
+    } catch (error) {
 
-        const data = await response.json();
+        output(
+            "configResult",
+            {
+                success: false,
+                error:
+                    error.message
+            }
+        );
+    }
+}
 
 
-        setResult(
-            "passwordResult",
-            data,
-            response.ok && data.success === true
+/*
+|--------------------------------------------------------------------------
+| 2. CSRF
+|--------------------------------------------------------------------------
+*/
+
+async function getCSRF() {
+
+    try {
+
+        const result =
+            await apiRequest(
+                "/csrf",
+                {
+                    method:
+                        "GET"
+                }
+            );
+
+
+        output(
+            "csrfResult",
+            result.data
         );
 
 
         if (
-            response.ok &&
-            data.success === true
+            result.data.success &&
+            result.data.data &&
+            result.data.data.csrfToken
         ) {
 
-            setStatus(
-                "Password Login موفق",
-                true
+            csrfToken =
+                result.data.data.csrfToken;
+
+        }
+
+    } catch (error) {
+
+        output(
+            "csrfResult",
+            {
+                success: false,
+                error:
+                    error.message
+            }
+        );
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Ensure CSRF
+|--------------------------------------------------------------------------
+*/
+
+async function ensureCSRF() {
+
+    if (csrfToken) {
+
+        return csrfToken;
+    }
+
+
+    const result =
+        await apiRequest(
+            "/csrf",
+            {
+                method:
+                    "GET"
+            }
+        );
+
+
+    if (
+        !result.data.success ||
+        !result.data.data?.csrfToken
+    ) {
+
+        throw new Error(
+            "CSRF Token دریافت نشد."
+        );
+    }
+
+
+    csrfToken =
+        result.data.data.csrfToken;
+
+
+    return csrfToken;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| 3. SESSION
+|--------------------------------------------------------------------------
+*/
+
+async function getSession() {
+
+    try {
+
+        const result =
+            await apiRequest(
+                "/session",
+                {
+                    method:
+                        "GET"
+                }
             );
+
+
+        output(
+            "sessionResult",
+            result.data
+        );
+
+    } catch (error) {
+
+        output(
+            "sessionResult",
+            {
+                success: false,
+                error:
+                    error.message
+            }
+        );
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| 4. LOGOUT
+|--------------------------------------------------------------------------
+*/
+
+async function logout() {
+
+    try {
+
+        await ensureCSRF();
+
+
+        const result =
+            await apiRequest(
+                "/logout",
+                {
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "X-CSRF-Token":
+                            csrfToken
+
+                    }
+                }
+            );
+
+
+        output(
+            "logoutResult",
+            result.data
+        );
+
+
+        if (
+            result.data?.success
+        ) {
+
+            csrfToken =
+                null;
+        }
+
+    } catch (error) {
+
+        output(
+            "logoutResult",
+            {
+                success: false,
+                error:
+                    error.message
+            }
+        );
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| 5. PASSWORD LOGIN
+|--------------------------------------------------------------------------
+*/
+
+async function passwordLogin() {
+
+    try {
+
+        const identifier =
+            document
+                .getElementById(
+                    "loginIdentifier"
+                )
+                .value
+                .trim();
+
+
+        const password =
+            document
+                .getElementById(
+                    "loginPassword"
+                )
+                .value;
+
+
+        if (!identifier) {
+
+            throw new Error(
+                "نام کاربری یا ایمیل را وارد کنید."
+            );
+        }
+
+
+        if (!password) {
+
+            throw new Error(
+                "رمز عبور را وارد کنید."
+            );
+        }
+
+
+        await ensureCSRF();
+
+
+        let result =
+            await apiRequest(
+                "/login/password",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "X-CSRF-Token":
+                            csrfToken
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            identifier:
+                                identifier,
+
+                            password:
+                                password
+
+                        })
+
+                }
+            );
+
+
+        /*
+         * اگر CSRF مشکل داشت،
+         * دوباره Token می‌گیریم.
+         */
+
+        if (
+            result.data?.error?.code ===
+            "CSRF_FAILED"
+        ) {
+
+            csrfToken =
+                null;
+
+            await ensureCSRF();
+
+
+            result =
+                await apiRequest(
+                    "/login/password",
+                    {
+
+                        method:
+                            "POST",
+
+                        headers: {
+
+                            "X-CSRF-Token":
+                                csrfToken
+
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                identifier:
+                                    identifier,
+
+                                password:
+                                    password
+
+                            })
+
+                    }
+                );
+        }
+
+
+        output(
+            "loginResult",
+            result.data
+        );
+
+
+        if (
+            result.data?.success
+        ) {
+
+            const redirect =
+                result
+                    .data
+                    .data
+                    ?.redirect ||
+                "/dashboard.html";
+
 
             /*
-             * Important:
-             * Session Cookie is HttpOnly.
-             * JavaScript cannot read it.
+             * برای تست فعلاً
+             * 2 ثانیه صبر می‌کنیم.
              */
 
-            document.getElementById("password").value = "";
+            setTimeout(
+                function() {
 
-        } else {
+                    window.location.href =
+                        redirect;
 
-            setStatus(
-                "Password Login ناموفق",
-                false
+                },
+                2000
             );
         }
 
-
     } catch (error) {
 
-        setResult(
-            "passwordResult",
-            error.message,
-            false
-        );
-
-        setStatus(
-            "خطای ارتباطی",
-            false
+        output(
+            "loginResult",
+            {
+                success: false,
+                error:
+                    error.message
+            }
         );
     }
 }
 
 
-/* --------------------------------------------------
-   SMS REQUEST
--------------------------------------------------- */
+/*
+|--------------------------------------------------------------------------
+| 6. SMS REQUEST
+|--------------------------------------------------------------------------
+*/
 
-async function requestSms() {
-
-    if (!csrfToken) {
-
-        await testCsrf();
-
-        if (!csrfToken) {
-
-            setResult(
-                "smsResult",
-                "CSRF Token دریافت نشد.",
-                false
-            );
-
-            return;
-        }
-    }
-
-
-    const phone =
-        document.getElementById("phone").value.trim();
-
-
-    if (!phone) {
-
-        setResult(
-            "smsResult",
-            "شماره موبایل را وارد کنید.",
-            false
-        );
-
-        return;
-    }
-
-
-    setResult(
-        "smsResult",
-        "در حال درخواست OTP..."
-    );
-
+async function requestSMS() {
 
     try {
 
-        const response = await request(
-            "/login/sms/request",
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    phone
-                })
-            }
-        );
+        await ensureCSRF();
 
 
-        const data = await response.json();
+        const phone =
+            document
+                .getElementById(
+                    "phone"
+                )
+                .value
+                .trim();
 
 
-        setResult(
+        const result =
+            await apiRequest(
+                "/login/sms/request",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "X-CSRF-Token":
+                            csrfToken
+
+                    },
+
+                    body:
+                        JSON.stringify({
+                            phone
+                        })
+
+                }
+            );
+
+
+        output(
             "smsResult",
-            data,
-            response.ok && data.success === true
+            result.data
         );
-
 
     } catch (error) {
 
-        setResult(
+        output(
             "smsResult",
-            error.message,
-            false
+            {
+                success: false,
+                error:
+                    error.message
+            }
         );
     }
 }
 
 
-/* --------------------------------------------------
-   SMS VERIFY
--------------------------------------------------- */
+/*
+|--------------------------------------------------------------------------
+| 7. SMS VERIFY
+|--------------------------------------------------------------------------
+*/
 
-async function verifySms() {
-
-    if (!csrfToken) {
-
-        await testCsrf();
-
-        if (!csrfToken) {
-
-            setResult(
-                "smsResult",
-                "CSRF Token دریافت نشد.",
-                false
-            );
-
-            return;
-        }
-    }
-
-
-    const phone =
-        document.getElementById("phone").value.trim();
-
-    const otp =
-        document.getElementById("otp").value.trim();
-
-
-    if (!phone || !otp) {
-
-        setResult(
-            "smsResult",
-            "شماره موبایل و OTP را وارد کنید.",
-            false
-        );
-
-        return;
-    }
-
-
-    setResult(
-        "smsResult",
-        "در حال بررسی OTP..."
-    );
-
+async function verifySMS() {
 
     try {
 
-        const response = await request(
-            "/login/sms/verify",
-            {
-                method: "POST",
-                body: JSON.stringify({
-                    phone,
-                    otp
-                })
-            }
-        );
+        await ensureCSRF();
 
 
-        const data = await response.json();
+        const phone =
+            document
+                .getElementById(
+                    "phone"
+                )
+                .value
+                .trim();
 
 
-        setResult(
-            "smsResult",
-            data,
-            response.ok && data.success === true
-        );
+        const otp =
+            document
+                .getElementById(
+                    "otp"
+                )
+                .value
+                .trim();
 
 
-        if (
-            response.ok &&
-            data.success === true
-        ) {
+        const result =
+            await apiRequest(
+                "/login/sms/verify",
+                {
 
-            setStatus(
-                "SMS Login موفق",
-                true
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "X-CSRF-Token":
+                            csrfToken
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            phone,
+                            otp
+
+                        })
+
+                }
             );
 
-            document.getElementById("otp").value = "";
-        }
 
+        output(
+            "smsResult",
+            result.data
+        );
 
     } catch (error) {
 
-        setResult(
+        output(
             "smsResult",
-            error.message,
-            false
+            {
+                success: false,
+                error:
+                    error.message
+            }
         );
     }
 }
 
 
-/* --------------------------------------------------
-   INITIAL TEST
--------------------------------------------------- */
+/*
+|--------------------------------------------------------------------------
+| INITIAL TEST
+|--------------------------------------------------------------------------
+*/
 
 window.addEventListener(
-    "DOMContentLoaded",
-    async () => {
+    "load",
+    async function() {
 
-        await testConfig();
+        /*
+         * به صورت خودکار Config را می‌خوانیم.
+         */
 
-        await testCsrf();
-
-        await testSession();
+        await getConfig();
 
     }
 );
+
 </script>
 
 </body>
-  </html>
+</html>
