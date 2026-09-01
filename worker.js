@@ -1,3 +1,4 @@
+
 /*
  * Authentication Core for Cloudflare Workers + D1
  *
@@ -591,9 +592,40 @@ async function registration(request, env, requestId) {
       await env.DB.prepare(`INSERT OR IGNORE INTO user_roles(user_id,role_id,created_at) VALUES(?,?,?)`).bind(userId, "role-user", created).run();
     }
   } catch (e) {
-    await audit(env, request, requestId, "REGISTRATION_FAILED", false, null, { reason: "database" });
-    return withHeaders(failure("REGISTRATION_FAILED", "ثبت‌نام انجام نشد.", requestId, 500), corsHeaders(request, env));
-  }
+
+    console.error(
+        "REGISTRATION_DATABASE_ERROR",
+        requestId,
+        {
+            name: e?.name || "Error",
+            message: e?.message || String(e),
+            stack: e?.stack || null
+        }
+    );
+
+    await audit(
+        env,
+        request,
+        requestId,
+        "REGISTRATION_FAILED",
+        false,
+        null,
+        {
+            reason: "database",
+            error: e?.message || String(e)
+        }
+    );
+
+    return withHeaders(
+        failure(
+            "REGISTRATION_FAILED",
+            "ثبت‌نام انجام نشد.",
+            requestId,
+            500
+        ),
+        corsHeaders(request, env)
+    );
+}
 
   if (c.requireEmailVerification && email) {
     const token = randomToken(32);
