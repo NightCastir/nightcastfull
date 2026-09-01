@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="ورود امن به حساب کاربری">
+<title>ورود | Authentication Core</title>
+<style>
+:root{--bg:#07111f;--panel:rgba(10,23,40,.84);--line:rgba(255,255,255,.12);--text:#f5f7fb;--muted:#aab5c5;--accent:#78a9ff;--accent2:#b98cff;--danger:#ff7d91;--ok:#65d6a2;--shadow:0 28px 80px rgba(0,0,0,.42)}
+*{box-sizing:border-box}html,body{min-height:100%;margin:0}body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;background:radial-gradient(circle at 15% 15%,rgba(120,169,255,.22),transparent 30%),radial-gradient(circle at 85% 10%,rgba(185,140,255,.18),transparent 26%),linear-gradient(160deg,#050b15,#0a1729 55%,#040811);color:var(--text);display:flex;align-items:center;justify-content:center;padding:24px;overflow-x:hidden}.stars,.stars:before,.stars:after{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(circle,rgba(255,255,255,.55) 1px,transparent 1.5px);background-size:97px 97px;opacity:.16}.stars:before{background-size:173px 173px;transform:translate(23px,31px);opacity:.12}.stars:after{background-size:251px 251px;transform:translate(-41px,17px);opacity:.1}.shell{width:min(100%,430px);position:relative;z-index:1}.brand{text-align:center;margin-bottom:22px}.logo{width:58px;height:58px;margin:0 auto 13px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(120,169,255,.3),rgba(185,140,255,.3));border:1px solid var(--line);box-shadow:0 18px 45px rgba(0,0,0,.25);font-size:25px}.brand h1{margin:0;font-size:28px}.brand p{margin:8px 0 0;color:var(--muted);font-size:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:28px;box-shadow:var(--shadow);backdrop-filter:blur(18px);padding:20px}.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:5px;background:rgba(255,255,255,.05);border-radius:15px;margin-bottom:20px}.tab{border:0;background:transparent;color:var(--muted);padding:11px 5px;border-radius:11px;cursor:pointer;font:inherit;font-size:13px}.tab[aria-selected="true"]{background:rgba(255,255,255,.1);color:var(--text);box-shadow:0 4px 18px rgba(0,0,0,.15)}.view{display:none}.view.active{display:block}.field{margin-bottom:14px}.field label{display:block;font-size:13px;margin-bottom:7px;color:#d9e0eb}.field input{width:100%;border:1px solid var(--line);background:rgba(0,0,0,.18);color:var(--text);border-radius:13px;padding:13px 14px;font:inherit;outline:none;transition:.2s}.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(120,169,255,.12)}.row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:4px 0 16px}.link{color:var(--accent);text-decoration:none;font-size:13px}.link:hover{text-decoration:underline}.primary{width:100%;border:0;border-radius:13px;padding:13px 15px;background:linear-gradient(135deg,#6e9dff,#a777ff);color:#fff;font:700 15px inherit;cursor:pointer;box-shadow:0 14px 30px rgba(103,130,255,.24)}.primary:disabled{opacity:.6;cursor:not-allowed}.secondary{width:100%;border:1px solid var(--line);border-radius:13px;padding:12px 15px;background:rgba(255,255,255,.04);color:var(--text);font:inherit;cursor:pointer}.divider{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:12px;margin:20px 0}.divider:before,.divider:after{content:"";height:1px;background:var(--line);flex:1}.socials{display:grid;grid-template-columns:1fr 1fr;gap:8px}.notice{display:none;border-radius:12px;padding:11px 12px;margin-bottom:14px;font-size:13px;line-height:1.8}.notice.show{display:block}.notice.error{background:rgba(255,125,145,.09);border:1px solid rgba(255,125,145,.25);color:#ffc3cd}.notice.ok{background:rgba(101,214,162,.09);border:1px solid rgba(101,214,162,.25);color:#baf2d7}.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:17px}.spinner{display:inline-block;width:15px;height:15px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-3px;margin-left:7px}@keyframes spin{to{transform:rotate(360deg)}}.small{font-size:12px;color:var(--muted);line-height:1.8;margin-top:10px}@media(min-width:700px){body{padding:40px}.card{padding:25px}}
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<main class="shell">
+  <header class="brand">
+    <div class="logo" aria-hidden="true">✦</div>
+    <h1>خوش آمدید</h1>
+    <p>برای ادامه، وارد حساب کاربری خود شوید</p>
+  </header>
+  <section class="card" aria-label="ورود">
+    <div class="tabs" role="tablist" aria-label="روش ورود">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="passwordView" id="passwordTab">ورود دستی</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="smsView" id="smsTab">ورود با SMS</button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="oidcView" id="oidcTab">ورود با OpenID</button>
+    </div>
+
+    <div id="notice" class="notice" role="alert" aria-live="polite"></div>
+
+    <section id="passwordView" class="view active" role="tabpanel" aria-labelledby="passwordTab">
+      <form id="passwordForm" novalidate>
+        <div class="field"><label for="identifier">ایمیل یا نام کاربری</label><input id="identifier" name="identifier" autocomplete="username" required maxlength="254"></div>
+        <div class="field"><label for="password">رمز عبور</label><input id="password" name="password" type="password" autocomplete="current-password" required maxlength="256"></div>
+        <div class="row"><a class="link" href="forgot-password.html">فراموشی رمز عبور</a><a class="link" href="register.html">ثبت‌نام</a></div>
+        <button class="primary" id="passwordButton" type="submit">ورود</button>
+      </form>
+    </section>
+
+    <section id="smsView" class="view" role="tabpanel" aria-labelledby="smsTab">
+      <form id="smsRequestForm" novalidate>
+        <div class="field"><label for="mobile">شماره موبایل</label><input id="mobile" inputmode="tel" autocomplete="tel" placeholder="+989121234567" maxlength="16"></div>
+        <button class="primary" type="submit">دریافت کد</button>
+      </form>
+      <form id="smsVerifyForm" hidden novalidate>
+        <div class="field"><label for="otp">کد تأیید</label><input id="otp" inputmode="numeric" autocomplete="one-time-code" maxlength="6"></div>
+        <button class="primary" type="submit">تأیید و ورود</button>
+        <button class="secondary" type="button" id="smsBack" style="margin-top:8px">تغییر شماره</button>
+      </form>
+      <p class="small">ورود پیامکی فقط زمانی فعال می‌شود که SMS Provider واقعی روی Worker پیکربندی شده باشد.</p>
+    </section>
+
+    <section id="oidcView" class="view" role="tabpanel" aria-labelledby="oidcTab">
+      <button class="primary" id="oidcButton" type="button">ادامه با OpenID</button>
+      <p class="small">Providerهای OpenID از سمت Worker کنترل می‌شوند و Client Secret هرگز در مرورگر قرار نمی‌گیرد.</p>
+    </section>
+
+    <div class="divider">یا</div>
+    <div class="socials">
+      <button class="secondary" type="button" disabled aria-disabled="true">Google</button>
+      <button class="secondary" type="button" disabled aria-disabled="true">Apple</button>
+    </div>
+    <div class="footer">با ورود یا ثبت‌نام، قوانین و حریم خصوصی را می‌پذیرید.</div>
+  </section>
+</main>
+<script>
+(() => {
+  // Public URL only. For production, prefer serving this UI and the Worker API
+  // from the same site/custom domain to avoid cross-site cookie restrictions.
+  const API_BASE_URL = "https://nightcastworks.tomasgermany2580.workers.dev";
+  let csrfToken = null;
+  const $ = s => document.querySelector(s);
+  const notice = $("#notice");
+  function show(text, type="error"){notice.textContent=text;notice.className=`notice show ${type}`}
+  function clearNotice(){notice.textContent="";notice.className="notice"}
+  async function init(){
+    try{const r=await fetch(`${API_BASE_URL}/api/auth/csrf`,{credentials:"include"});const j=await r.json();if(!j.success)throw new Error();csrfToken=j.data.csrfToken}catch{show("ارتباط امن با سرویس ورود برقرار نشد.")}
+    const params=new URLSearchParams(location.search);if(params.get("error"))show(params.get("error"));
+  }
+  async function api(path,options={}){
+    const headers={"Content-Type":"application/json",...(options.headers||{})};if(csrfToken)headers["X-CSRF-Token"]=csrfToken;
+    const r=await fetch(`${API_BASE_URL}${path}`,{...options,headers,credentials:"include"});const j=await r.json().catch(()=>null);if(!j)return{success:false};return j;
+  }
+  function busy(btn,on,text){btn.disabled=on;btn.innerHTML=on?'<span class="spinner"></span>در حال پردازش…':text}
+  function activate(name){document.querySelectorAll(".tab").forEach(t=>t.setAttribute("aria-selected",t.id===`${name}Tab`));document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));$(`#${name}View`).classList.add("active");clearNotice()}
+  $("#passwordTab").onclick=()=>activate("password");$("#smsTab").onclick=()=>activate("sms");$("#oidcTab").onclick=()=>activate("oidc");
+  $("#passwordForm").onsubmit=async e=>{e.preventDefault();clearNotice();const b=$("#passwordButton");busy(b,true);const j=await api("/api/auth/login/password",{method:"POST",body:JSON.stringify({identifier:$("#identifier").value,password:$("#password").value})});busy(b,false,"ورود");if(j.success){location.href=j.data.redirect||"/dashboard.html"}else show(j.error?.message||"ورود انجام نشد.")};
+  $("#smsRequestForm").onsubmit=async e=>{e.preventDefault();clearNotice();const j=await api("/api/auth/login/sms/request",{method:"POST",body:JSON.stringify({mobile:$("#mobile").value})});if(j.success){$("#smsRequestForm").hidden=true;$("#smsVerifyForm").hidden=false;show("اگر شماره قابل استفاده باشد، کد ارسال خواهد شد.","ok")}else show(j.error?.message||"ارسال کد انجام نشد.")};
+  $("#smsVerifyForm").onsubmit=async e=>{e.preventDefault();clearNotice();const j=await api("/api/auth/login/sms/verify",{method:"POST",body:JSON.stringify({mobile:$("#mobile").value,otp:$("#otp").value})});if(j.success)location.href=j.data.redirect||"/dashboard.html";else show(j.error?.message||"کد صحیح نیست.")};
+  $("#smsBack").onclick=()=>{$("#smsRequestForm").hidden=false;$("#smsVerifyForm").hidden=true;$("#otp").value="";clearNotice()};
+  $("#oidcButton").onclick=()=>{location.href=`${API_BASE_URL}/api/auth/oidc/start`};
+  init();
+})();
+</script>
+</body>
+</html>

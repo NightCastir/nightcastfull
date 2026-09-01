@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="color-scheme" content="dark"><title>ثبت‌نام | Authentication Core</title>
+<style>
+:root{--bg:#07111f;--panel:rgba(10,23,40,.86);--line:rgba(255,255,255,.12);--text:#f5f7fb;--muted:#aab5c5;--accent:#78a9ff;--danger:#ff7d91;--ok:#65d6a2}*{box-sizing:border-box}html,body{min-height:100%;margin:0}body{font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;background:radial-gradient(circle at 20% 15%,rgba(120,169,255,.2),transparent 30%),radial-gradient(circle at 80% 10%,rgba(185,140,255,.16),transparent 26%),linear-gradient(160deg,#050b15,#0a1729 55%,#040811);color:var(--text);display:flex;align-items:center;justify-content:center;padding:24px}.shell{width:min(100%,440px)}.brand{text-align:center;margin-bottom:20px}.logo{width:58px;height:58px;margin:auto auto 12px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(120,169,255,.3),rgba(185,140,255,.3));border:1px solid var(--line);font-size:25px}.brand h1{margin:0;font-size:27px}.brand p{color:var(--muted);font-size:14px;margin:8px 0}.card{background:var(--panel);border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:0 28px 80px rgba(0,0,0,.42);backdrop-filter:blur(18px)}.notice{display:none;border-radius:12px;padding:11px 12px;margin-bottom:14px;font-size:13px;line-height:1.8}.notice.show{display:block}.notice.error{background:rgba(255,125,145,.09);border:1px solid rgba(255,125,145,.25);color:#ffc3cd}.notice.ok{background:rgba(101,214,162,.09);border:1px solid rgba(101,214,162,.25);color:#baf2d7}.field{margin-bottom:14px}.field label{display:block;font-size:13px;margin-bottom:7px;color:#d9e0eb}.field input{width:100%;border:1px solid var(--line);background:rgba(0,0,0,.18);color:var(--text);border-radius:13px;padding:13px 14px;font:inherit;outline:none}.field input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(120,169,255,.12)}.primary,.secondary{width:100%;border-radius:13px;padding:13px 15px;font:inherit;cursor:pointer}.primary{border:0;background:linear-gradient(135deg,#6e9dff,#a777ff);color:#fff;font-weight:700}.secondary{border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);margin-top:9px}.footer{text-align:center;color:var(--muted);font-size:13px;margin-top:16px}.link{color:var(--accent);text-decoration:none}.terms{font-size:12px;color:var(--muted);line-height:1.8;margin:10px 0 16px}@media(min-width:700px){body{padding:40px}}
+</style>
+</head>
+<body>
+<main class="shell"><header class="brand"><div class="logo" aria-hidden="true">✦</div><h1>ساخت حساب</h1><p>یک حساب امن برای شروع ایجاد کنید</p></header>
+<section class="card"><div id="notice" class="notice" role="alert" aria-live="polite"></div>
+<form id="form" novalidate>
+<div class="field"><label for="email">ایمیل</label><input id="email" type="email" autocomplete="email" required maxlength="254"></div>
+<div class="field" id="usernameField"><label for="username">نام کاربری <span style="color:var(--muted)">(اختیاری)</span></label><input id="username" autocomplete="username" maxlength="64"></div>
+<div class="field" id="mobileField"><label for="mobile">موبایل <span style="color:var(--muted)">(اختیاری)</span></label><input id="mobile" inputmode="tel" autocomplete="tel" maxlength="16"></div>
+<div class="field"><label for="password">رمز عبور</label><input id="password" type="password" autocomplete="new-password" required maxlength="256"></div>
+<div class="field"><label for="confirm">تکرار رمز عبور</label><input id="confirm" type="password" autocomplete="new-password" required maxlength="256"></div>
+<p class="terms">رمز عبور در مرورگر ذخیره نمی‌شود و پردازش امنیتی آن در Worker انجام می‌شود.</p>
+<button class="primary" id="button" type="submit">ثبت‌نام</button>
+</form>
+<div class="footer">حساب دارید؟ <a class="link" href="login.html">ورود</a></div></section></main>
+<script>
+(()=>{
+const API_BASE_URL="https://nightcastworks.tomasgermany2580.workers.dev";let csrfToken=null;const $=s=>document.querySelector(s),notice=$("#notice");
+function show(t,type="error"){notice.textContent=t;notice.className=`notice show ${type}`}
+async function init(){try{const r=await fetch(`${API_BASE_URL}/api/auth/csrf`,{credentials:"include"});const j=await r.json();if(!j.success)throw 0;csrfToken=j.data.csrfToken;const c=j.data.config;$("#usernameField").style.display=c.requireUsername?"block":"block";$("#mobileField").style.display=c.requireMobile?"block":"block"}catch{show("ارتباط امن با سرویس ثبت‌نام برقرار نشد.")}}
+$("#form").onsubmit=async e=>{e.preventDefault();notice.className="notice";const b=$("#button");b.disabled=true;const r=await fetch(`${API_BASE_URL}/api/auth/register`,{method:"POST",credentials:"include",headers:{"Content-Type":"application/json","X-CSRF-Token":csrfToken||""},body:JSON.stringify({email:$("#email").value,username:$("#username").value,mobile:$("#mobile").value,password:$("#password").value,passwordConfirmation:$("#confirm").value})});const j=await r.json().catch(()=>null);b.disabled=false;if(j?.success){show(j.data.verificationRequired?"ثبت‌نام انجام شد. ابتدا مرحله تأیید را کامل کنید و سپس وارد شوید.":"ثبت‌نام با موفقیت انجام شد. اکنون وارد شوید.","ok");setTimeout(()=>location.href="login.html",1600)}else show(j?.error?.message||"ثبت‌نام انجام نشد.")};init();
+})();
+</script>
+</body></html>

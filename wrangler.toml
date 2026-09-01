@@ -1,0 +1,51 @@
+name = "nightcastworks"
+main = "worker.js"
+compatibility_date = "2026-08-31"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "nightcastdb"
+database_id = "58662883-33c3-4947-88f8-eeafae7aeada"
+
+# Recommended for production: configure Cloudflare Rate Limiting API.
+# The Worker detects env.AUTH_RATE_LIMIT when this binding is added.
+# Example:
+# [[ratelimits]]
+# name = "AUTH_RATE_LIMIT"
+# namespace_id = "<YOUR_NAMESPACE_ID>"
+# simple = { limit = 20, period = 60 }
+
+[vars]
+APP_NAME = "Authentication Core"
+LOGIN_SUCCESS_REDIRECT = "/dashboard.html"
+LOGIN_PAGE = "https://nightcastir.github.io/nightcastfull/login.html"
+OIDC_TOKEN_AUTH_METHOD = "client_secret_post"
+COOKIE_NAME = "__Host-auth_session"
+SESSION_TTL_SECONDS = "604800"
+OTP_TTL_SECONDS = "180"
+OTP_MAX_ATTEMPTS = "5"
+PBKDF2_ITERATIONS = "310000"
+SMS_ENABLED = "false"
+SMS_PROVIDER = "REPLACE_ME"
+OIDC_ENABLED = "false"
+OIDC_ISSUER = ""
+OIDC_CLIENT_ID = ""
+OIDC_REDIRECT_URI = ""
+ALLOWED_ORIGINS = "https://nightcastir.github.io"
+REGISTRATION_ENABLED = "true"
+REQUIRE_EMAIL = "true"
+REQUIRE_USERNAME = "false"
+REQUIRE_MOBILE = "false"
+REQUIRE_EMAIL_VERIFICATION = "false"
+REQUIRE_MOBILE_VERIFICATION = "false"
+AUTO_LOGIN_AFTER_REGISTRATION = "false"
+PASSWORD_MIN_LENGTH = "10"
+PASSWORD_MAX_LENGTH = "256"
+VERIFICATION_TTL_SECONDS = "900"
+PASSWORD_RESET_TTL_SECONDS = "900"
+AUTH_DEBUG = "false"
+
+# If your login UI is hosted on the same site as the API, use Lax.
+# If the UI is cross-site (e.g. GitHub Pages -> workers.dev), None is required,
+# but browser third-party-cookie policies can still break cookie authentication.
+COOKIE_SAMESITE = "Lax"
