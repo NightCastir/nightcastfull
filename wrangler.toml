@@ -48,4 +48,4 @@ AUTH_DEBUG = "false"
 # If your login UI is hosted on the same site as the API, use Lax.
 # If the UI is cross-site (e.g. GitHub Pages -> workers.dev), None is required,
 # but browser third-party-cookie policies can still break cookie authentication.
-COOKIE_SAMESITE = "Lax"
+COOKIE_SAMESITE = "none"
